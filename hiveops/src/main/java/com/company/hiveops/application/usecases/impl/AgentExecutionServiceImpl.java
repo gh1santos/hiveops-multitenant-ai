@@ -36,7 +36,6 @@ public class AgentExecutionServiceImpl implements AgentExecutionUseCase {
     private final AgentRepository agentRepository;
     private final AuditLogRepository auditLogRepository;
 
-    // Injeção do Publicador de Eventos (Desacoplando WebSockets do Domínio)
     private final ApplicationEventPublisher eventPublisher;
 
     private static final BigDecimal COST_PER_1K_TOKENS = new BigDecimal("0.002");
@@ -71,7 +70,6 @@ public class AgentExecutionServiceImpl implements AgentExecutionUseCase {
                 .promptUsed(systemPrompt + "\n\n" + userPrompt)
                 .build();
 
-        // Publica evento genérico de notificação
         eventPublisher.publishEvent(new TaskNotificationEvent(
                 task.getCompany().getId(),
                 "Agent " + agent.getName() + " started task: " + task.getTitle()
@@ -117,7 +115,6 @@ public class AgentExecutionServiceImpl implements AgentExecutionUseCase {
 
             agentRepository.save(agent);
 
-            // Publica o evento específico de conclusão
             eventPublisher.publishEvent(new TaskCompletedEvent(
                     task.getCompany().getId(), task.getId(), task.getTitle(), agent.getName()
             ));

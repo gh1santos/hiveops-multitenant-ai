@@ -13,11 +13,8 @@ public class AuthController {
 
     private final JwtService jwtService;
 
-    // Endpoint público (liberado no SecurityConfig) para você gerar seu token de teste
     @PostMapping("/login")
     public AuthResponse login(@RequestBody AuthRequest request) {
-        // Aqui você faria a validação de usuário/senha no futuro.
-        // Por enquanto, confiamos na requisição para gerar o token do Tenant.
         String token = jwtService.generateToken(request.email(), request.companyId());
         return new AuthResponse(token);
     }

@@ -20,10 +20,8 @@ public class ExecutionController {
 
     @GetMapping
     public List<Execution> listExecutions() {
-        // Pega o ID da empresa através do Token JWT (Multi-tenant)
         UUID companyId = TenantContext.getCurrentTenant();
 
-        // Retorna a lista de resultados para o React
         return executionRepository.findAllByCompanyIdOrderByCreatedAtDesc(companyId);
     }
 }

@@ -42,7 +42,6 @@ public class JwtService {
     }
 
     private SecretKey getSignInKey() {
-        // Lê a chave como texto puro (UTF-8) em vez de Base64
         byte[] keyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
     }

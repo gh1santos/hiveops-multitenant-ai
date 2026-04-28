@@ -43,7 +43,7 @@ public class TaskService {
                 .title(title)
                 .description(description)
                 .priority(priority)
-                .status(Task.TaskStatus.PENDING) // Nasce pendente para o Heartbeat capturar
+                .status(Task.TaskStatus.PENDING)
                 .build();
 
         log.info("Task created: {} for Agent: {}", title, agent != null ? agent.getName() : "Unassigned");

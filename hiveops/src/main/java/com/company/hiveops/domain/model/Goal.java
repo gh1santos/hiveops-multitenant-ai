@@ -23,7 +23,7 @@ public class Goal {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_goal_id")
-    private Goal parentGoal; // Permite criar sub-metas
+    private Goal parentGoal;
 
     @Column(nullable = false)
     private String title;

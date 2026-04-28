@@ -36,7 +36,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final UUID companyId = jwtService.extractCompanyId(jwt);
 
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            // Define o contexto Multi-tenant para esta thread
             TenantContext.setCurrentTenant(companyId);
 
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
@@ -48,7 +47,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             filterChain.doFilter(request, response);
         } finally {
-            // Limpa o contexto ao fim da requisição para evitar vazamento de memória
             TenantContext.clear();
         }
     }

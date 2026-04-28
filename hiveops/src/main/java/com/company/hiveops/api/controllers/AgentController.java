@@ -44,7 +44,6 @@ public class AgentController {
     @GetMapping
     public List<Agent> listAgents() {
         UUID companyId = TenantContext.getCurrentTenant();
-        // O repositório garante que só retornem agentes desta empresa específica
         return agentRepository.findAllByCompanyId(companyId);
     }
 }

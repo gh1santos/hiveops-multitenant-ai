@@ -23,20 +23,20 @@ public class AuditLog {
     private UUID companyId;
 
     @Column(name = "entity_type", nullable = false, length = 50)
-    private String entityType; // Ex: AGENT, TASK, EXECUTION, BUDGET
+    private String entityType;
 
     @Column(name = "entity_id", nullable = false)
     private UUID entityId;
 
     @Column(nullable = false, length = 100)
-    private String action; // Ex: BUDGET_EXCEEDED, TASK_COMPLETED
+    private String action;
 
     @Column(columnDefinition = "jsonb")
     @JdbcTypeCode(SqlTypes.JSON)
-    private Map<String, Object> details; // Para simplificar o MVP, usaremos String simulando JSON
+    private Map<String, Object> details;
 
     @Column(name = "created_by")
-    private String createdBy; // Ex: SYSTEM, ou UUID do usuário
+    private String createdBy;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)

@@ -22,7 +22,6 @@ public class DashboardController {
     private final AgentRepository agentRepository;
     private final TaskRepository taskRepository;
     private final GoalRepository goalRepository;
-    // Precisaremos de um método countBy no repositório de Execution se for usá-lo ativamente.
 
     @GetMapping("/summary")
     public DashboardSummaryResponse getSummary() {
@@ -34,16 +33,12 @@ public class DashboardController {
         long pendingTasks = taskRepository.findAllByCompanyIdAndStatus(companyId, Task.TaskStatus.PENDING).size();
         long completedTasks = taskRepository.findAllByCompanyIdAndStatus(companyId, Task.TaskStatus.DONE).size();
 
-        // Em um cenário real de produção, criaríamos métodos "countByCompanyId..."
-        // nos repositórios para o banco de dados fazer a contagem (SELECT COUNT) e economizar memória,
-        // em vez de trazer a lista inteira (.size()). Para o MVP, isso serve.
-
         return new DashboardSummaryResponse(
                 totalAgents,
                 activeGoals,
                 pendingTasks,
                 completedTasks,
-                0 // Placeholder para contagem de falhas
+                0
         );
     }
 }
